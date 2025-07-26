@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h2 {
+    color: #333;
+}
+.error {
+    color: red;
+    margin: 10px 0;
+}
+form {
+    margin-top: 20px;
+}
+input[type="file"] {
+    margin-bottom: 10px;
+}
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+#result {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
