@@ -4,7 +4,7 @@ A FastAPI-based application for processing court order PDFs, extracting `nationa
 
 ## Project Structure
 ```
-agentic_ai_court_order_processor
+court_order_processor
 ├── app.py              # FastAPI application
 ├── customer_db.py      # Customer database operations
 ├── actions.py          # Action definitions and processing
@@ -36,8 +36,8 @@ agentic_ai_court_order_processor
 ## Setup
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/agentic_ai_court_order_processor.git
-   cd agentic_ai_court_order_processor
+   git clone https://github.com/your-username/court_order_processor.git
+   cd court_order_processor
    ```
 
 2. **Install Dependencies**
@@ -90,8 +90,8 @@ agentic_ai_court_order_processor
    - Open Command Prompt or PowerShell.
    - Clone the repository:
      ```cmd
-     git clone https://github.com/your-username/agentic_ai_court_order_processor.git
-     cd agentic_ai_court_order_processor
+     git clone https://github.com/your-username/court_order_processor.git
+     cd court_order_processor
      ```
 
 4. **Create a Virtual Environment**
@@ -154,7 +154,7 @@ agentic_ai_court_order_processor
 
 ## Running in Google Colab
 1. **Upload Files**
-   - Upload the entire project folder to `/content/agentic_ai_court_order_processor` in Colab.
+   - Upload the entire project folder to `/content/court_order_processor` in Colab.
 
 2. **Run the Colab Script**
    - Open `run_colab.py` in a Colab notebook and execute it.
@@ -230,7 +230,7 @@ See `requirements.txt` for a full list. Key dependencies:
 ## Troubleshooting
 - **API Key Errors**: Verify the key at [platform.openai.com](https://platform.openai.com).
 - **JSON Parsing Errors**: Check logs for `Raw content from LLM: ...` to diagnose LLM output.
-- **File Issues**: Ensure all files are in `/content/agentic_ai_court_order_processor` (Colab) or project root (local).
+- **File Issues**: Ensure all files are in `/content/court_order_processor` (Colab) or project root (local).
 - **Event Loop Errors**: Ensure `nest-asyncio` is applied in Colab.
 - **Windows PATH Issues**: If `python` or `pip` commands fail, re-install Python with "Add to PATH" enabled or manually add Python to the system PATH.
 
