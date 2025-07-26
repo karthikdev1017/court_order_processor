@@ -163,48 +163,13 @@ court_order_processor
 3. **Access the App**
    - Use the ngrok public URL displayed in the output.
 
-## Testing
-1. **Create Sample PDFs**
-   In a Colab cell or locally with Python:
-   ```python
-   from reportlab.lib.pagesizes import letter
-   from reportlab.pdfgen import canvas
 
-   # Sample 1.pdf
-   c = canvas.Canvas("Sample 1.pdf", pagesize=letter)
-   c.drawString(100, 750, "National ID: 9876543210")
-   c.drawString(100, 730, "Action: freeze_account")
-   c.save()
 
-   # Sample 2.pdf
-   c = canvas.Canvas("Sample 2.pdf", pagesize=letter)
-   c.drawString(100, 750, "National ID number 12345667890")
-   c.drawString(100, 730, "Action: release_funds")
-   c.save()
-
-   # Sample 3.pdf
-   c = canvas.Canvas("Sample 3.pdf", pagesize=letter)
-   c.drawString(100, 750, "ID No.112112334445")
-   c.drawString(100, 730, "Action: freeze_account")
-   c.save()
-
-   # Sample 4.pdf
-   c = canvas.Canvas("Sample 4.pdf", pagesize=letter)
-   c.drawString(100, 750, "identification number 5544332211")
-   c.drawString(100, 730, "Action: suspend_accounts")
-   c.save()
-
-   # Sample 5.pdf
-   c = canvas.Canvas("Sample 5.pdf", pagesize=letter)
-   c.drawString(100, 750, "Amman Economic Court")
-   c.save()
-   ```
-
-2. **Upload PDFs**
+1. **Upload PDFs**
    - Access the ngrok URL in a browser.
    - Upload each PDF via the web interface.
 
-3. **Expected Outputs**
+2. **Expected Outputs**
    - Sample 1: `Customer CUST001: Freeze account`
    - Sample 2: `Customer CUST002: Release funds`
    - Sample 3: `Customer CUST003: Freeze account`
@@ -234,5 +199,3 @@ See `requirements.txt` for a full list. Key dependencies:
 - **Event Loop Errors**: Ensure `nest-asyncio` is applied in Colab.
 - **Windows PATH Issues**: If `python` or `pip` commands fail, re-install Python with "Add to PATH" enabled or manually add Python to the system PATH.
 
-## License
-MIT License
