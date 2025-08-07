@@ -1,16 +1,34 @@
 import re
 import fitz  # PyMuPDF
 from llm_extractor import extract_fields_llm
+from vision_preprocessor import is_scanned_pdf, extract_text_vision
 import logging
+import os
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def extract_text_from_pdf(pdf_bytes):
     try:
-        doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-        text = "\n".join(page.get_text() for page in doc)
-        doc.close()
+        # Save pdf_bytes to a temporary file for scanned PDF check
+        temp_pdf_path = "/tmp/temp_pdf.pdf"
+        with open(temp_pdf_path, "wb") as f:
+            f.write(pdf_bytes)
+        
+        # Check if PDF is scanned
+        if is_scanned_pdf(temp_pdf_path):
+            logger.info("Detected scanned PDF, using Vision API")
+            text = extract_text_vision(temp_pdf_path)
+        else:
+            logger.info("Detected regular PDF, using PyMuPDF")
+            doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+            text = "\n".join(page.get_text() for page in doc)
+            doc.close()
+        
+        # Clean up temporary file
+        if os.path.exists(temp_pdf_path):
+            os.remove(temp_pdf_path)
+        
         logger.info(f"Extracted text: {text[:200]}...")
         return text
     except Exception as e:

@@ -2,7 +2,10 @@ from langgraph.graph import StateGraph, END
 from typing import TypedDict, Dict
 from customer_db import get_customer_id
 from actions import execute_action
+from vision_preprocessor import is_scanned_pdf, extract_text_vision
 import logging
+import os
+from io import BytesIO
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -17,7 +20,28 @@ class State(TypedDict):
 def extract_text(state: State) -> State:
     from utils import extract_text_from_pdf
     logger.info("Extracting text from PDF")
-    state["text"] = extract_text_from_pdf(state["pdf_bytes"])
+    try:
+        # Save pdf_bytes to a temporary file
+        temp_pdf_path = "/tmp/temp_pdf.pdf"
+        with open(temp_pdf_path, "wb") as f:
+            f.write(state["pdf_bytes"])
+        
+        # Check if PDF is scanned
+        if is_scanned_pdf(temp_pdf_path):
+            logger.info("Detected scanned PDF, using Vision API")
+            state["text"] = extract_text_vision(temp_pdf_path)
+        else:
+            logger.info("Detected regular PDF, using pymupdf")
+            state["text"] = extract_text_from_pdf(state["pdf_bytes"])
+        
+        # Clean up temporary file
+        if os.path.exists(temp_pdf_path):
+            os.remove(temp_pdf_path)
+        
+        logger.info(f"Extracted text length: {len(state['text'])}")
+    except Exception as e:
+        logger.error(f"Text extraction failed: {str(e)}")
+        state["text"] = ""
     return state
 
 def extract_fields_node(state: State) -> State:

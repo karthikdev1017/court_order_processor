@@ -1,5 +1,4 @@
-# Install dependencies
-!pip install -r requirements.txt
+
 
 # Apply nest_asyncio for Colab's event loop
 import nest_asyncio
